@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // 模块化 
+    var m1 = angular.module('myApp',[]); //创建模块（名字name，依赖arr）
+    // 定义控制器
+    // [] 解决压缩问题
+    m1.controller('Aaa', ['$scope', function($scope){
+        $scope.name = 'hello';
+    }])
+    m1.controller('Bbb', ['$scope', function($scope){
+        $scope.name = 'world';
+    }])
+    // 工具方法
+    // angular.module 创建模块
+    // angular.bind() 修改this 指向 = $.proxy 
+    function show(){
+        alert(this);
+    }
+    angular.bind(document,show)();
+    // angular.copy()   拷贝对象
+    var c = angular.copy(a,b) //a 把值覆盖了b a=b=c
+    // angular.extend() 拷贝对象
+    var c = angular.extend(b,a) // 把a的值赋给b，c=b
+</script>
+<body>
+    <span ng-controller="Aaa">
+        {{name}}
+    </span>
+    <span ng-controller="Bbb">
+        {{name}}
+    </span>
+</body>
+</html>

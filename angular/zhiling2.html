@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+    <script src="http://cdn.bootcss.com/angular-sanitize/1.5.0/angular-sanitize.min.js" type="text/javascript" ></script>
+</head>
+<style type="text/css" media="screen">
+    .active{
+        background:orange;
+    }
+    .yellow{
+        font-size: 30px;
+    }
+</style>        
+<script type="text/javascript">
+    // 属性指令
+    // ng-app 初始化指令
+    // ng-controller 控制器指令
+    // ng-click 点击事件指令
+    // ng-repeat 循环指令
+    // ng-model 数据指令，数据指令的一个配置 ng-model-options="{updateOn:'blur'}"
+    // ng-repeat 循环指令
+    // 其它事件指令 input下面
+    // ng-selected 下拉菜单
+    // ng-change 改变
+    // ng-copy  复制
+    // ng-cut   剪切
+    // ng-paste 黏贴
+    // ng-disabled input 禁用指令
+    // ng-readonly 只读指令
+    // ng-checked 选框指令
+    // ng-value 等于 value={{value}}
+    // ng-bind 绑定文本指令，优化{{}} 数据
+    // ng-bind-template 绑定内容，可绑定多数值,需要加{{}}，支持多表达式
+    // ng-bind-html 绑定html内容,
+    // 需要//cdn.bootcss.com/angular-sanitize/1.5.0/angular-sanitize.min.js插件,
+    // 并且依赖ngSanitize到模块
+    // ng-cloak 模块，在表达式执行之前，css为display:none,解析完成之后，css设置为block，防止没解析看到{{}}
+    // ng-non-bindable 忽略解析该表达式
+    // ng-class class class指令,以大括号的方式添加ng-class="{orange:true}"
+    // ng-style style 指令 ng-style="{fontSize:20px;background:red}" ，可以ng-style={{}}
+    // ng-href 添加href 指令
+    // ng-src 添加src 指令
+    // ng-attr-(suffix) 添加属性指令 ng-attr-title 
+    // ng-show|ng-hide = true 添加显示隐藏属性，对CSS进行的显示和隐藏操作
+    // ng-if 添加显示隐藏，但是是对DOM节点添加和删除，true为添加节点，false为删除节点
+    // ng-switch 选择性的添加和删除元素，必须和on配合使用。包括ng-switch-default为默认显示,ng-switch-when="false"为切换显示
+    // ng-open 等于html5的details标签，兼容性不高
+    // ng-init 在HTML上初始化数据的指令
+    // ng-include 包含模板指令
+    // 
+    var m1 = angular.module('myApp',[]); //创建模块（名字name，依赖arr）
+    // 引入过滤器依赖 $filter
+    m1.controller('Aaa', ['$scope',function($scope){
+        
+     }]);
+    // 标签指令
+</script>
+<body>
+    <div ng-controller="Aaa" ng-include="'2.html'" scope="" onload="">
+        
+    </div>
+    <!-- <div ng-controller="Aaa">
+        <input type="text" name="" value="" placeholder="" ng-model="text" ng-model-options="{updateOn:'blur'}">
+        <p>{{text}}</p>
+    </div> -->
+</body>
+</html>

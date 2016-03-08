@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+    <script src="http://cdn.bootcss.com/angular-sanitize/1.5.0/angular-sanitize.min.js" type="text/javascript" ></script>
+</head>
+<style type="text/css" media="screen">
+    .active{
+        background:orange;
+    }
+    .yellow{
+        font-size: 30px;
+    }
+    #div1 div,#div2 div{
+        width: 300px;
+        height: 200px;padding: 40px;border:1px solid orange;display: none;
+    }
+    #div1 input,#div2 input{
+        padding: 10px;
+    }
+</style>        
+<script type="text/javascript">
+    var m1 = angular.module('myApp',[]); //创建模块（名字name，依赖arr）
+    // 引入过滤器依赖 $filter
+    m1.controller('Aaa', ['$scope',function($scope){
+        $scope.name = 'hello';
+        $scope.show = function(n){
+            alert(n);
+        }
+     }]);
+    // 自定义一个hello标签指令，如果标签指令的名字中间有-，则在定义的时候要写成驼峰，使用的时候使用-，如定义为myHello,使用为my-hello 
+    m1.directive('hello',function(){
+        // 指令的配置
+        return {
+            restrict:"E",
+            template:'<h1>hello,angular</h1>'
+        }
+    })
+    // 自定义一个hello1属性指令
+    m1.directive('hello1',function(){
+        // 指令的配置
+        return {
+            restrict:"AECM",
+            replace:true,
+            template:'<h1>hello A,angular</h1>'
+        }
+    })
+    // 自定义指令是通过 directive 来实现的。指令是可以复用的。
+    // 有下面四种自定义指令的类型
+    // restrict 四种自定义指令的类型
+    //【E标签指令】，使用方法 <hello></hello>
+    //【A属性指令】，使用方法 <div hello1></div>
+    //【C类指令】，使用方法 <div class="hello1"></div>
+    //【M注释类指令】，使用方法 <!-- directive:hello1 -->
+    // template 自定义指令模板
+    // replace 是否使用模板替换指令标签
+    // scope 使每一个指令的实例具有独立的作用域，默认是共享作用域，如果是true或者false则为独立作用域，但是相互之间还是有牵连
+    // 如果参数是{},则为隔离作用域，自定义指令在使用的时候，指令相互之间不在有联系。也不能访问控制器之中的数据
+    // scope 的绑定策略 @ = & ，这三个符号。可以绑定不同的数据  
+    // @ 解决不同的属性，绑定的是一个普通的字符串
+    // = 绑定父级作用域数据
+    // & 绑定父级作用域函数
+    // controller 制定隔离作用域的控制器，来查找数据。多个指令之间数据是共享的。
+    // templateUrl 引入外部自定义指令模板
+    // link 进行DOM操作的配置选项，link的参数（scope【作用域，访问controller中的数据】，element【元素】，attr【指令属性】，reController【】）
+    // 
+    // 属性指令跟模板没有太大的关系，一般是用来实现某个特定功能的。把功能封装为属性指令 
+    // 标签指令，实现一个完整的 插件 
+    // transclude 配置指令是否允许嵌套，使用方法见下页
+    // 
+    // 自定义一个选项卡指令【标签指令】
+    m1.directive('mTab',function(){
+        return {
+            restrict:'AE',
+            replace:true,
+            scope:{
+                myId:'@myId',
+                myName:'=myName',
+                myFun:'&myFun'
+            },
+            controller:['$scope', function($scope){
+               // $scope.name = '111111'; 
+            }],
+            templateUrl:'tab.html'
+        }
+    })
+
+</script>
+<body>
+    <div ng-controller="Aaa">
+        
+    
+    <hello></hello>
+    <hello1></hello1>
+    <div hello1></div>
+    <div class="hello1"></div>
+    <!-- directive:hello1 -->
+    <!-- 默认多个自定义指令共享作用域,如果多次使用自定义指令，导致数值相同 -->
+    <m-tab my-id="div1" my-name="name" my-fun="show(mun)"></m-tab>
+    <m-tab my-id="div2" my-name="name"></m-tab>
+    </div>
+</body>
+</html>

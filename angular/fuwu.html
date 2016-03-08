@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // angular 的服务
+    // $scope 作用域服务
+    // $watch 数据监听服务
+    // $apply 将普通数据按照angular方式执行的服务
+    // $rootScope 全局作用域
+    // $timeout 延迟服务
+    // $interval 循环服务
+    // $filter 过滤器服务
+    // $http 类似异步AJAX .其实angular下面的AJAX就是通过$http服务来实现的
+    // 
+    var m = angular.module('myApp', []);
+    m.controller('Aaa', ['$scope', function($scope){
+        
+    }]);
+    // 过滤器使用 
+</script>
+<body>
+    <span ng-controller="Aaa">
+       
+    </span>
+    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+
+<script type="text/javascript">
+    var m1 = angular.module('myApp',[]); //创建模块（名字name，依赖arr）
+    m1.controller('Aaa', ['$scope',function($scope){
+        
+    }]);
+    // transclude，配置指令之间是否允许嵌套。
+    // 使用方法 template:'<div>hello angular.js <span ng-transclude></span></div>'
+    // require 引入需要数据通讯的指令 如：require:'hello' ,查找自身上是否有hello指令，^hello，查询父级是否有hello指令 ?hello ,查找不到元素不会报错
+    // link 和 controller 的区别 
+    // link一般专注 DOM的操作，对当前指令内部的实现功能 
+    // controller 一般是多次调用指令的数据共享 ，指令之间交互的时候，可以提供一些共有的方法
+    m1.directive('hello',function(){
+        // 指令的配置
+        return {
+            restrict:"E",
+            replace:true,
+            transclude:true,
+            controller:function($scope){
+                // $scope 只能在本控制器里面使用。
+                $scope.name = 'sai';
+                //把数据添加到this上面，可以共享使用
+                this.name = 'zhao';
+            },
+            template:'<div>{{name}}<div ng-transclude></div></div>'
+        }
+    })
+    m1.directive('hi',function(){
+        // 指令的配置
+        return {
+            restrict:"E",
+            replace:true,
+            template:'<h1>{{name}}</h1>',
+            require:'^hello',
+            // reController 第四个参数，就是require配置所包含的指令名称
+            link:function(scope,element,attr,reController){
+                // 可以判断出只有添加到this上面的属性才可以继承过来
+                scope.name = reController.name;
+                console.log()
+            }
+        }
+    })
+    
+</script>
+<body>
+    <div ng-controller="Aaa">
+        <hello>
+            <hi></hi>
+        </hello>
+    </div>
+</body>
+</html>

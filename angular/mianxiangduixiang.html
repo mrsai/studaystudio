@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // angular 面向对象的实现
+    // 
+    var m = angular.module('myApp', []);
+    m.controller('Aaa', ['$scope',funcHandler]);
+    
+    function funcHandler($scope){
+        console.log(this== $scope);
+        console.log(this);
+        console.log($scope);
+    }
+
+    funcHandler.prototype.name = 'sai';
+    funcHandler.prototype.show = function(){
+        
+        return 'Angular.js';
+    }
+</script>
+<body>
+    <span ng-controller="funcHandler as def">
+        {{def.name}},{{def.show()}}
+    </span>
+    
+</body>
+</html>

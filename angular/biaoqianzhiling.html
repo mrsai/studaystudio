@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en"  ng-app="myApp" >
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // 标签指令，对现有标签进行封装
+    var m = angular.module('myApp', []);
+    m.controller('Aaa', ['$scope',funcHandler]);
+    function funcHandler($scope){
+        
+    }
+    funcHandler.prototype.colors = [
+        {name:'red'},
+        {name:'bule'}
+    ];
+    funcHandler.prototype.mysel = "big";
+    funcHandler.prototype.email = '1233';
+    // 标签指令 a,当链接为空的时候，阻止默认事件
+    // select 指令，需要配合ng-model使用,语法 ng-options = color.name for color in colors
+    // novalidate 加在form标签上，阻止浏览器的默认验证行为
+    // 下面的这些验证，需要通过name的方法来查找，需要绑定ng-model
+    // $valid 表单验证是有效的值为true，无效的值为false
+    // $invalid 表单验证是无效的值为true，有效的值为false，验证失败为真，失败为假
+    // $pristine 原始值，如果表单输入的值没有修改过，则为真
+    // $dirty 表单值修改过为true，初始值为false
+    // $error 表单验证通过或者失败的验证信息集合
+    // angular 提供的一些验证css 
+    // .ng-valid,.ng-invilid,.ng-pristine,.ng-dirty
+</script>
+<style type="text/css" media="screen">
+    input.ng-valid{border:1px solid blue;}
+    input.ng-invalid{border:1px solid red;}
+</style>
+<body>
+    <span ng-controller="funcHandler as def">
+        <a href="">12345</a>
+        {{def.name}},{{def.colors}},{{def.mysel}}
+        <select name="" ng-options="color.name for color in def.colors" ng-model="def.mysel">
+            <option value="">1111</option>}
+        </select>
+        <form action="" method="get" accept-charset="utf-8" name="myform">
+            <div>{{email}}</div>
+            <input type="text" name="mytext" value="" placeholder="" ng-model="def.email" required ng-minlength="5" ng-pattern="/^[a-zA-Z]+$/">
+            <div>{{myform.mytext.$valid}}</div>
+            <div>{{myform.mytext.$invalid}}</div>
+            <div>{{myform.mytext.$pristine}}</div>
+            <div>{{myform.mytext.$dirty}}</div>
+            <div>{{myform.mytext.$error}}</div>
+        </form>
+    </span>
+    <a href="">12345</a>
+    
+
+
+</body>
+</html>

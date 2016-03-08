@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // 过滤器
+    var m = angular.module('myApp', []);
+    m.controller('Aaa', ['$scope', function($scope){
+        $scope.data = 778787881323.86438927633;
+        $scope.name = 'sai';
+        $scope.obj = {
+            name:'zhao',
+            age:18
+        }
+        $scope.tb = [
+            {color:'red',age:'20'},
+            {color:'yellow',age:'30'},
+            {color:'blue',age:'40'},
+            {color:'green',age:'10'}
+        ]
+    }]);
+    // 过滤器使用 
+</script>
+<body>
+    <span ng-controller="Aaa">
+        <p>金额过滤器 : {{data | currency:"￥"}}  </p> 
+        <p>金额过滤器 : {{data | number:2 }}  </p> 
+        <p>大小写过滤器 : {{name | uppercase }}  </p> 
+        <p>JSON格式化 :
+            <pre>{{obj|json}}</pre>
+        </p>
+        <p>截取字符串或者数组 : {{name | limitTo:2 }}  </p> 
+        <p>格式化时间 : {{data | date:'yyyy'}}  </p> 
+        <p>排序以及逆排序： {{tb | orderBy:'age':true}}</p>
+        <p>过滤方法,true参数匹配整体和模糊匹配：{{tb | filter:'l':true}}</p>
+    </span>
+    
+</body>
+</html>

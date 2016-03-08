@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // $scope.$apply 的用法，使原生具有angular的服务 
+    // 监听数据变化，然后更新视图 。配合第三方库使用 。
+    var m = angular.module('myApp', []);
+    /*m.controller('Aaa', ['$scope','$timeout', function($scope,$timeout){
+        $scope.name = "hello";
+        $timeout(function(){
+            $scope.name = "hi";
+        },1000)
+    }])*/
+    m.controller('Aaa', ['$scope', function($scope){
+        $scope.name = "hello";
+        setTimeout(function(){
+            $scope.$apply(function(){
+                $scope.name = "hi";
+            })
+        },1000)
+    }]);
+    // m.run 方法,初始化全局数据。不需要使用控制器。数值挂载在全局作用域
+    m.run(['$rootScope',function($rootScope){
+        $rootScope.name = "sai";
+    }])
+</script>
+<body>
+    <span>
+        {{name}}
+    </span>
+    
+</body>
+</html>

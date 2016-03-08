@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+    <script src="http://cdn.bootcss.com/angular-sanitize/1.5.0/angular-sanitize.min.js" type="text/javascript" ></script>
+</head>
+<style type="text/css" media="screen">
+    .active{
+        background:orange;
+    }
+    .yellow{
+        font-size: 30px;
+    }
+</style>        
+<script type="text/javascript">
+    // 指令
+    // ng-app 初始化指令
+    // ng-controller 控制器指令
+    // ng-click 点击事件指令
+    // ng-repeat 循环指令
+    // ng-model 数据指令
+    // ng-repeat 循环指令
+    // 其它事件指令 input下面
+    // ng-selected 下拉菜单
+    // ng-change 改变
+    // ng-copy  复制
+    // ng-cut   剪切
+    // ng-paste 黏贴
+    // ng-disabled input 禁用指令
+    // ng-readonly 只读指令
+    // ng-checked 选框指令
+    // ng-value 等于 value={{value}}
+    // ng-bind 绑定文本指令，优化{{}} 数据
+    // ng-bind-template 绑定内容，可绑定多数值,需要加{{}}，支持多表达式
+    // ng-bind-html 绑定html内容,
+    // 需要//cdn.bootcss.com/angular-sanitize/1.5.0/angular-sanitize.min.js插件,
+    // 并且依赖ngSanitize到模块
+    // ng-cloak 模块，在表达式执行之前，css为display:none,解析完成之后，css设置为block，防止没解析看到{{}}
+    // ng-non-bindable 忽略解析该表达式
+    // ng-class class class指令,以大括号的方式添加ng-class="{orange:true}"
+    // ng-style style 指令 ng-style="{fontSize:20px;background:red}" ，可以ng-style={{}}
+    // ng-href 添加href 指令
+    // ng-src 添加src 指令
+    // ng-attr-(suffix) 添加属性指令 ng-attr-title 
+    // ng-show|ng-hide = true 添加显示隐藏属性，对CSS进行的显示和隐藏操作
+    // ng-if 添加显示隐藏，但是是对DOM节点添加和删除，true为添加节点，false为删除节点
+    // ng-switch 选择性的添加和删除元素，必须和on配合使用。包括ng-switch-default为默认显示,ng-switch-when="false"为切换显示
+    // ng-open 等于html5的details标签，兼容性不高
+    // ng-init 在HTML上初始化数据的指令
+    // ng-include 包含模板指令
+    // 
+    var m1 = angular.module('myApp',['ngSanitize']); //创建模块（名字name，依赖arr）
+    // 引入过滤器依赖 $filter
+    m1.controller('Aaa', ['$scope','$filter','$interval',function($scope,$filter,$interval){
+        $scope.data =[
+            'aaa','bbb','ccc'
+        ]
+        $scope.str = '<h1>hello</h1>';
+        var orgin =  [
+            {name:'张大',age:12},
+            {name:'王大',age:2},
+            {name:'李大',age:22},
+            {name:'赵大',age:15}
+        ];
+        $scope.dataTb = angular.copy(orgin);
+
+        $scope.tbshort = function(arg){
+            arguments.callee['fns'+arg]=!arguments.callee['fns'+arg];
+            // 使用过滤器排序
+            $scope.dataTb = $filter('orderBy')($scope.dataTb,arg,arguments.callee['fns'+arg]);
+        }
+
+        $scope.tbfilter = function(){
+            // 使用过滤器过滤
+            $scope.dataTb = $filter('filter')(orgin,$scope.searchValue);
+        }
+
+        $scope.isDisabled = true;
+        var iNow = 5;
+        $scope.limSec = iNow+"秒";
+        
+        var timer = $interval(function(){
+            iNow--;
+            $scope.limSec = iNow+"秒";
+            if(iNow==0){
+                $interval.cancel(timer);
+                $scope.limSec = "再次发送验证码";
+                $scope.isDisabled = false;
+            }
+
+        },1000);
+
+        $scope.url = 'http://www.baidu.com';
+        $scope.title = '画好愉悦';
+        $scope.bloon = true;
+    }]);
+
+</script>
+<body>
+    <span ng-controller="Aaa">
+        <ul>
+            <li ng-repeat="(key, value) in data">{{key}}+{{value}}</li>
+        </ul>
+        <input type="text" ng-model="searchValue" ng-change="tbfilter()"></input>
+        <table class="gridtable" border="1">
+            <tr>
+                <th>ID</th>
+                <th ng-click="tbshort('name')">姓名</th>
+                <th ng-click="tbshort('age')">年龄</th>
+                <th>序列</th>
+                <th>是否是第一个元素</th>
+                <th>是否是最后一个元素</th>
+                <th>是否中间元素</th>
+                <th>奇数元素</th>
+                <th>偶数元素</th>
+
+            </tr>
+            <!-- 使用扩展指令 -->
+            <tr ng-repeat="(key, value) in dataTb" class="{{$even?'active':''}}">
+                <td>{{key}}</td>
+                <td>{{value.name}}</td>
+                <td>{{value.age}}</td>
+                <td>{{$index}}</td>
+                <td>{{$first}}</td>
+                <td>{{$last}}</td>
+                <td>{{$middle}}</td>
+                <td>{{$even}}</td>
+                <td>{{$odd}}</td>
+            </tr>  
+        </table>
+        <!-- 使用扩展指令部分循环 -->
+        <div ng-repeat-start="(key, value) in data">
+            {{value}}
+        </div>
+        <div>
+            {{value}}
+        </div>
+        <div ng-repeat-end>
+            {{value}}
+        </div>
+        
+        <input type="checkbox" name="" value="" ng-model="ad">
+        <select name="">
+            <option value="1">111111</option>
+            <option value="2" ng-selected="ad">222222</option>
+            <option value="3">333333</option>
+        </select>
+        <input type="text" name="" value="{{ccc}}" placeholder="" ng-paste="ccc='该表单不支持黏贴'">{{ccc}}
+        <input type="button" name="" value="{{limSec}}" ng-disabled="isDisabled">
+        <div ng-bind="str+ ' ' +str"></div>
+        <div ng-bind-template="{{str}} {{str}}"></div>
+        <div ng-bind-html="str"></div>
+        <div ng-cloak>{{str}}</div>
+        <div ng-non-bindable>{{str}}</div>
+        <div ng-class="{active:true,yellow:true}">ng-class 使用方法</div>
+        <div ng-style="{color:'red',background:'yellow',fontSize:'30px'}" >
+            ng-style 使用方法
+        </div>
+        <a ng-href="{{url}}" ng-attr-title="{{title}}">ng-href 用法</a>
+        <input type="checkbox" name="" value="" ng-model="bloon">
+        <a href="#" title="" ng-show="bloon">ng-show</a>
+        <a href="#" title="" ng-hide="bloon">ng-hide</a>
+        <div ng-switch on="bloon">
+            <p ng-switch-default>默认显示</p>
+            <p ng-switch-when="false">切换显示</p>
+        </div>
+        <details ng-open="bloon">
+            <summary>点击我</summary>
+            <p>显示我呀隐藏我 。。。。</p>
+        </details>
+        <div ng-repeat="(key, value) in data" ng-init="ouin=$index">
+            {{value}},{{ouin}} ng-init 的使用方法
+        </div>
+
+    </span>
+</body>
+</html>
