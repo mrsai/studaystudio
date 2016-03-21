@@ -16,17 +16,37 @@
     // $interval 循环服务
     // $filter 过滤器服务
     // $http 类似异步AJAX .其实angular下面的AJAX就是通过$http服务来实现的
-    // 
+    // $location 服务  
+    // $location.absUrl() 绝对路径
+    // $location.path() 路径,和路由相关，可获取可设置
+    // $location.path().replace() 取消历史管理
+    // $location.hash() 获取哈希值 #pos
+    // $location.search({'age':20}); 设置值
+    // $location.Url() 获取网址信息 除了域名之外的地址
+    // $location.host() 主机名
+    // $location.port() 端口号
+    // $location.protocol() 协议 http或者HTTPS等
+    // $anchorScroll 锚点跳转服务
     var m = angular.module('myApp', []);
-    m.controller('Aaa', ['$scope', function($scope){
+    m.controller('Aaa', ['$scope','$http','$location', function($scope,$http,$location){
+        // $http({
+        //     method:"GET",
+        //     url:'./data.json'
+        // }).success(function(data,state,headers,config){
+        //     console.log(data);
+        // }).error(function(data){
+        //     console.log(data);
+        // });
+        // // 支持简写方法
+        // $http.get(url).success(fn).error(fn);
         
+        console.log($location.path('abs').replace());
     }]);
-    // 过滤器使用 
 </script>
 <body>
-    <span ng-controller="Aaa">
+    <div ng-controller="Aaa">
        
-    </span>
+    </div>
     
 </body>
 </html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<style type="text/css" media="screen">
+    #parent div{width: 300px;height: 500px;border: 1px solid #ff0000;}
+    #parent ul{width: 200px;position: fixed;top:0;right: 20px;}
+</style>
+<script type="text/javascript">
+    
+    // $anchorScroll 锚点跳转服务
+    var m = angular.module('myApp', []);
+    m.controller('Aaa', ['$scope','$http','$location','$anchorScroll','$interpolate',function($scope,$http,$location,$anchorScroll,$interpolate){
+        $scope.change = function(id){
+            $location.hash(id);
+            $anchorScroll();
+            console.log(id);
+        }
+
+
+        $scope.$watch('body',function(newtext){
+            if(newtext){
+                var temp = $interpolate(newtext);
+                $scope.textvalue = temp({name:$scope.name});
+            }
+            
+        })
+    }]);
+
+    //var cache = $cacheFactory(cacheId, options={capacity:3}) anglarjs 提供的一种缓存服务【缓存id名字，缓存条数设置】
+    // cache.info()   输出信息
+    // cache.put(name,sai)  设置缓存
+    // cache.get(name)  获取缓存
+    // cache.remove(name)  删除缓存
+    // $log 服务，等于console.log();
+    // $log.log(),.error,info,warn等
+    // $interpolate  插值服务
+    // 
+    
+    
+</script>
+<body>
+    <div ng-controller="Aaa">
+        <input type="text" name="" value="" ng-model="name">
+        <textarea name="" ng-model="body"></textarea>
+        <div>
+            {{textvalue}}
+        </div>
+       <div id="parent">
+            <ul>
+                <li ng-repeat="id in [1,2,3,4,5]" ng-click="change('div'+id)">{{id}}-aaaaaaa</li>
+            </ul>
+            <div ng-repeat="id in [1,2,3,4,5]" ng-attr-id="div{{id}}">
+               
+            </div>
+       </div>
+    </div>
+    
+</body>
+</html>

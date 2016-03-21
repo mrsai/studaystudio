@@ -1,0 +1,231 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 7, ../sass/demo.scss */
+.box {
+  border-top: 1px solid red;
+  border-bottom: 1px solid green;
+}
+
+/* line 16, ../sass/demo.scss */
+nav a {
+  color: red;
+}
+/* line 19, ../sass/demo.scss */
+header nav a {
+  color: green;
+}
+
+/* line 27, ../sass/demo.scss */
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+/* line 32, ../sass/demo.scss */
+.clearfix:after {
+  clear: both;
+  overflow: hidden;
+}
+
+/* line 38, ../sass/demo.scss */
+a:link {
+  font-size: 14px;
+}
+/* line 41, ../sass/demo.scss */
+a:visited {
+  font-size: 14px;
+}
+/* line 44, ../sass/demo.scss */
+a:hover {
+  font-size: 14px;
+}
+
+/* line 62, ../sass/demo.scss */
+.btn, .btn-primary {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+/* line 68, ../sass/demo.scss */
+.btn-primary {
+  background-color: #f36;
+  color: #fff;
+}
+
+/* line 74, ../sass/demo.scss */
+.btn, .btn-primary {
+  margin-top: 5px;
+}
+
+/* line 77, ../sass/demo.scss */
+.btn, .btn-primary {
+  padding-top: 5px;
+}
+
+/* line 89, ../sass/demo.scss */
+.header-text-small {
+  font-size: 12px;
+}
+
+/* line 90, ../sass/demo.scss */
+.header-text-medium {
+  font-size: 20px;
+}
+
+/* line 91, ../sass/demo.scss */
+.header-text-big {
+  font-size: 40px;
+}
+
+/* .login-box {
+    @include set-value(big);
+} */
+/* line 5, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 108, ../sass/demo.scss */
+.headline {
+  font-family: Arial, verdana, Helvetica;
+}
+
+/* line 111, ../sass/demo.scss */
+.main-sec {
+  font-size: 16px;
+  font-family: Arial, verdana, Helvetica;
+  font-weight: 400;
+}
+/* line 119, ../sass/demo.scss */
+.headline-sec {
+  font-family: Arial, verdana, Helvetica;
+}
+@media (min-width: 768px) {
+  /* line 111, ../sass/demo.scss */
+  .main-sec {
+    width: 40%;
+    float: left;
+  }
+}
+
+/* line 128, ../sass/demo.scss */
+.col-1 {
+  width: 60px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-2 {
+  width: 120px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-3 {
+  width: 180px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-4 {
+  width: 240px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-5 {
+  width: 300px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-6 {
+  width: 360px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-7 {
+  width: 420px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-8 {
+  width: 480px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-9 {
+  width: 540px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-10 {
+  width: 600px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-11 {
+  width: 660px;
+}
+
+/* line 128, ../sass/demo.scss */
+.col-12 {
+  width: 720px;
+}

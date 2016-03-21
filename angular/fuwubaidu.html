@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="//cdn.bootcss.com/angular.js/1.5.0/angular.min.js" type="text/javascript" ></script>
+</head>
+<scr
+    var m = angular.module('myApp', []);
+    m.controller('Aaa', ['$scope','$http', function($scope,$http){
+        var url = 'https://www.baidu.com/his?wd=&from=pc_web&rf=3&hisdata=%5B%7B%22time%22%3A1453527674%2C%22kw%22%3A%22%E7%94%B5%E5%BD%B1%E5%A4%A9%E5%A0%82%22%7D%2C%7B%22time%22%3A1453796901%2C%22kw%22%3A%22%24.load%22%7D%2C%7B%22time%22%3A1453800652%2C%22kw%22%3A%22%E7%BF%BB%E8%AF%91%22%7D%2C%7B%22time%22%3A1454320810%2C%22kw%22%3A%22post%20%E6%8F%90%E4%BA%A4%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%22%7D%2C%7B%22time%22%3A1454320820%2C%22kw%22%3A%22post%20%E6%8F%90%E4%BA%A4%E5%9B%BE%E7%89%87%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%22%7D%2C%7B%22time%22%3A1454320882%2C%22kw%22%3A%22post%20%E5%9B%BE%E7%89%87%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%22%7D%2C%7B%22time%22%3A1454321030%2C%22kw%22%3A%22post%E5%9B%BE%E7%89%87%E4%B9%B1%E7%A0%81%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%22%7D%2C%7B%22time%22%3A1456116001%2C%22kw%22%3A%22%E7%AD%8B%E8%86%9C%E7%82%8E%E7%9A%84%E7%97%87%E7%8A%B6%22%7D%2C%7B%22time%22%3A1456198596%2C%22kw%22%3A%22%E6%BD%98%E5%AE%B6%E5%9B%AD%22%7D%5D&json=1&p=3&sid=18881_1434_15344_12304&bs=1&sc=eb&csor=0&cb=JSON_CALLBACK';
+        $http({
+            method:"JSONP",
+            url:url
+        }).success(function(data,state,aaaa,config){
+            console.log(data);
+        });
+        
+    }]);
+</script>
+<body>
+    <div ng-controller="Aaa">
+       <input type="text" name="" value="">
+       <button type="" value="">搜索</button>
+    </div>
+    
+</body>
+</html>
