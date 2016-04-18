@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // 服务
+    // 自定义服务可以使用 factory 和 provider 来定义。二者的区别就在于是否可以进行配置
+    var m = angular.module('myApp', [/*可以使用模块来实现模块之间的通信*/]);
+    
+    // 使用factory来自定义一个服务
+    m.factory('randomNum',function(){
+        return function(m1,m2){
+            return Math.random() * (m2-m1) + m1;
+        }
+    })
+    //使用factory 再定义一个服务
+    m.factory('myServer',function(){
+        return {
+            name:'sai',
+            show:function(){
+                console.log(this.name);
+            }
+        }
+    })
+    // 使用 provider 自定义一个服务
+    m.provider("myServerP",function(){
+        return {
+            bt:true,
+            $get:function(){
+                var _this = this;
+                return{
+                    name:'sai',
+                    show:function(){
+                        console.log(_this.bt);
+                    }
+                }
+            }
+        }
+    })
+    // 对myServerP服务提供配置
+    m.config(['myServerPProvider',function(myServerPProvider) {
+        myServerPProvider.bt = false;
+    }])
+
+    // 使用 provider 自定义一个随机数服务
+    // 服务是可以共享的，通过配置来实现不同的功能。
+    // 指令类似于插件，服务类似于对象
+    m.provider('myRandom',function(){
+        return {
+            boolean:false,
+            int:function(boolean){
+                if(boolean){
+                    this.boolean = true;
+                }else{
+                    this.boolean = false;
+                }
+            },
+            $get:function(){
+                var _this = this;
+                return function(m1,m2){
+                    var m = Math.random() * (m2-m1) + m1;
+                    if(_this.boolean){
+                        return Math.round(m);
+                    }else{
+                        return m;
+                    }
+                    
+                }
+            }
+        }
+    })
+    // service 自定义服务的功能是针对构造函数的一种写法
+    var fn = function(){
+        this.name = 'hi';
+    }
+    fn.prototype.age=11;
+    m.service('duixiang',fn);
+    
+    // 设置常量
+    m.constant('age', 11); //可以配置
+    m.value('age', 12)  //不可以配置
+    
+    // 为该随机数服务配置供应商，使其支出为提供整数
+    m.config(['myRandomProvider',function(myRandomProvider) {
+        myRandomProvider.int(true);
+    }])
+    m.controller('Aaa', ['$scope','randomNum','myServerP','myRandom','duixiang',function($scope,randomNum,myServerP,myRandom,duixiang){
+        // console.log(myRandom(1,20))
+        console.log(duixiang.name);
+    }]);
+</script>
+<body>
+    <div ng-controller="Aaa">
+      
+    </div>
+    
+</body>
+</html>

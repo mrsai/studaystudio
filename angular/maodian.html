@@ -14,11 +14,15 @@
     
     // $anchorScroll 锚点跳转服务
     var m = angular.module('myApp', []);
+    // 我们在这里给这个 锚点跳转供应商提供一个服务配置,禁用了自动跳转
+    m.config(['$anchorScrollProvider',function($anchorScrollProvider) {
+        $anchorScrollProvider.disableAutoScrolling();
+    }]);
     m.controller('Aaa', ['$scope','$http','$location','$anchorScroll','$interpolate',function($scope,$http,$location,$anchorScroll,$interpolate){
         $scope.change = function(id){
             $location.hash(id);
             $anchorScroll();
-            console.log(id);
+            // console.log(id);
         }
 
 
@@ -55,7 +59,7 @@
                 <li ng-repeat="id in [1,2,3,4,5]" ng-click="change('div'+id)">{{id}}-aaaaaaa</li>
             </ul>
             <div ng-repeat="id in [1,2,3,4,5]" ng-attr-id="div{{id}}">
-               
+               div{{id}}
             </div>
        </div>
     </div>

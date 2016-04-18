@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    var data = {
+        name: 'ruoyu',
+        dog: {
+            color: 'yellow',
+            age: 2
+        }
+    };
+
+    var tpl = 'Hello, my name is  {{name}}. I have a {{dog.age}} year old  {{dog.color}} dog.';
+
+
+
+    
+
+    // 模块化 
+    (function(name, definition, context) {
+        if (typeof module !== 'undefined' && module.exports) {
+            mudule.exports = definition();
+        } else if(typeof context['define'] ==' function' && (context['define']['amd'] || context['define']['cmd'])){
+            define(definition);
+        }else{
+            context[name] = definition();
+        }
+    })('easyTpl', function() {
+        return function(tpl, data) {
+            var re = /{{([a-zA-Z&_][a-zA-Z0-9$_\.]+)}}/g;
+            return tpl.replace(re, function(raw, key, offset, string) {
+                var paths = key.split('.');
+                var lookup = data;
+                while (paths.length > 0) {
+                    lookup = lookup[paths.shift()];
+                }
+                return lookup || raw;
+            });
+        }
+    }, this);
+
+
+    var result = easyTpl(tpl, data);
+
+    console.log(result);
+    </script>
+</body>
+
+</html>

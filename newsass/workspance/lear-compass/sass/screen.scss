@@ -1,10 +1,13 @@
-@import "compass/layout";
 @import "compass/css3";
-@import "compass/typography";
 
 
-.list{
-    @include horizontal-list(20px,right);
-    padding: 20px;
-    ms-grid-column: 1;
+@include keyframes(myaninat){
+    0% {color:red}
+    100% {color:blue}
+};
+
+.radius{
+    @include border-radius(5px);
+    @include transform('translate');
+    @include translate(2,10)
 }

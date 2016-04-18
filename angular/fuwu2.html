@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+</head>
+<script type="text/javascript">
+    // 服务
+    // $q 服务，对异步操作进行的一些功能扩展。和jq的promise差不多。defer,resolve,reject,thtn,notify
+    // 供应商，服务的配置 Provider 。必须在模块的config方法下完成
+    // 
+    var m = angular.module('myApp', []);
+    // 插值计算的服务配置.
+    m.config(['$interpolateProvider','$logProvider',function($interpolateProvider,$logProvider) {
+        $interpolateProvider.startSymbol("##");
+        $interpolateProvider.endSymbol("**");
+        $logProvider.debugEnabled(false);
+    }])
+    m.controller('Aaa', ['$scope','$q','$interpolate','$log',function($scope,$q,$interpolate,$log){
+        $scope.name = 'sai';
+        // $q的使用方法。
+        var dfd = $q.defer();
+        function show(){
+            setTimeout(function(){
+                dfd.reject();
+            },2000);
+            return dfd.promise;
+        }
+        show().then(function(){
+            // alert('ok');
+        },function(){
+            // alert('faile');
+        });
+        $log.debug($scope.name);
+    }]);
+</script>
+<body>
+    <div ng-controller="Aaa">
+       ##name**
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- 指定从哪个模块开始初始化 -->
+<html lang="en" ng-app = myApp>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/angular.min.js" type="text/javascript" ></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.2.9/angular-route.min.js" type="text/javascript"></script>
+</head>
+<script type="text/javascript">
+    // 路由，带有历史管理。
+    // 插件的版本和主核不同，可能会引发错误
+    // ng-view 跟路由插件配套。是一个路由的主题切换内容部分。
+    // hash 值切换地址，必须添加 #，防止跳转
+    // 通过配置路由来使用，使用when的方式来配置路由，通过
+    // otherwise来配置其它的情况，redirectTo来配置指向
+    // 使用 $location（href） 可以配合路径来完成路由
+    // 参数，获取参数。
+    var m = angular.module('myApp', ['ngRoute']);
+    // 配置路由，通过供应商的的方式。
+    m.config(['$routeProvider',function($routeProvider) {
+        $routeProvider.when('/aaa/:num/:page',{
+            template:'<p>1111111{{name}}</p>',
+            controller:'Aaa'
+        }).when('/bbb',{
+            template:'<p>2222222{{name}}</p>',
+            controller:'Bbb'
+        }).when('/ccc',{
+            template:'<p>3333333{{name}}</p>'
+        }).otherwise({
+            redirectTo:'/aaa'
+        })
+    }])
+
+    // 绑定事件
+    m.run(['$rootScope',function($rootScope){
+        // event 模拟出来的event对象
+        // current 当前路径对应的数据值
+        // pre 前一个的路径的对应的数值
+        $rootScope.$on('$routeChangeStart',function(event,current,pre){
+            console.log('开始切换');
+        });
+        // 还有成功和失败俩个事件
+        // $routeChangeSuccess/Error
+        // 事件传播方式 $emit（发射）,类似事件冒泡的传播方式 
+        // $broadcast（广播） 类似于事件捕获传播方式
+    }]);
+
+    // 引入 $location 服务
+    m.controller('Aaa', ['$scope','$location','$routeParams', function($scope,$location,$routeParams){
+        $scope.$location = $location;
+        $scope.name = 'nihao';
+        console.log($routeParams)
+    }]);
+    m.controller('Bbb', ['$scope', function($scope){
+        $scope.name = '支付宝';
+    }]);
+    
+</script>
+<body>
+    <div ng-controller="Aaa">
+        <!-- 使用localtion 服务也可以代替 href -->
+        <a href="" title="" ng-click="$location.path('aaa/page/1')">11111</a>
+        <a href="#bbb" title="">2222222</a>
+        <a href="#aaa/456" title="">333333</a>
+        <div ng-view class="abbbs">
+           
+        </div>
+    </div>
+    
+</body>
+</html>

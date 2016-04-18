@@ -1,32 +1,38 @@
-/* line 6, ../sass/screen.scss */
-.list {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  *zoom: 1;
-  padding: 20px;
-  ms-grid-column: 1;
+@-moz-keyframes myaninat {
+  0% {
+    color: red;
+  }
+  100% {
+    color: blue;
+  }
 }
-/* line 62, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.list li {
-  list-style-image: none;
-  list-style-type: none;
-  margin-left: 0;
-  white-space: nowrap;
-  float: right;
-  padding-left: 20px;
-  padding-right: 20px;
+@-webkit-keyframes myaninat {
+  0% {
+    color: red;
+  }
+  100% {
+    color: blue;
+  }
 }
-/* line 49, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.list li:first-child {
-  padding-right: 0;
+@keyframes myaninat {
+  0% {
+    color: red;
+  }
+  100% {
+    color: blue;
+  }
 }
-/* line 50, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.list li:last-child {
-  padding-left: 0;
-}
-/* line 52, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_horizontal-list.scss */
-.list li.last {
-  padding-left: 0;
+/* line 9, ../sass/screen.scss */
+.radius {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-transform: "translate";
+  -ms-transform: "translate";
+  -webkit-transform: "translate";
+  transform: "translate";
+  -moz-transform: translate(2, 10);
+  -ms-transform: translate(2, 10);
+  -webkit-transform: translate(2, 10);
+  transform: translate(2, 10);
 }
